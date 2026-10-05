@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>BeltSentinel-X | Intelligent Conveyor Health</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div class="app-shell">
+    <aside class="sidebar">
+      <div class="brand">
+        <div class="brand-mark">BX</div>
+        <div>
+          <h1>BeltSentinel-X</h1>
+          <span>Conveyor Intelligence</span>
+        </div>
+      </div>
+
+      <div class="site-selector">
+        <span class="eyebrow">ACTIVE SITE</span>
+        <strong>Iron Ore Mine · Line 01</strong>
+        <span class="online-dot">● Live telemetry</span>
+      </div>
+
+      <nav>
+        <button class="nav-item active" data-page="overview"><span>▦</span> Overview</button>
+        <button class="nav-item" data-page="conveyor"><span>≋</span> Conveyor Health</button>
+        <button class="nav-item" data-page="zones"><span>⌖</span> Zone Monitoring</button>
+        <button class="nav-item" data-page="inspection"><span>◈</span> AI Inspection</button>
+        <button class="nav-item" data-page="alerts"><span>!</span> Alerts <b class="nav-badge">3</b></button>
+        <button class="nav-item" data-page="maintenance"><span>⚙</span> Maintenance</button>
+      </nav>
+
+      <div class="sidebar-bottom">
+        <div class="system-card">
+          <span class="eyebrow">SYSTEM STATUS</span>
+          <div class="status-row"><span class="status-dot green"></span> Sensor network <b>Online</b></div>
+          <div class="status-row"><span class="status-dot green"></span> AI engine <b>Running</b></div>
+          <div class="status-row"><span class="status-dot amber"></span> Inspection drone <b>Standby</b></div>
+        </div>
+        <div class="user-chip">
+          <div class="avatar">BS</div>
+          <div><strong>Control Room</strong><small>Operator console</small></div>
+        </div>
+      </div>
+    </aside>
+
+    <main class="main">
+      <header class="topbar">
+        <div>
+          <div class="breadcrumb">Operations / <span id="pageName">Overview</span></div>
+          <h2 id="pageTitle">Conveyor Health Overview</h2>
+        </div>
+        <div class="top-actions">
+          <div class="live-time"><span class="pulse"></span><span id="clock">--:--:--</span> IST</div>
+          <button class="icon-btn" id="simulateBtn" title="Simulate sensor update">↻</button>
+          <button class="operator"><span class="avatar small">BS</span> Operator <span>⌄</span></button>
+        </div>
+      </header>
+
+      <section id="overview" class="page active-page">
+        <div class="hero-strip">
+          <div>
+            <span class="eyebrow">BELT SENTINEL-X · INTELLIGENT MONITORING</span>
+            <h3>Predict failures before they stop production.</h3>
+            <p>Multimodal sensing combines belt/splice inspection, alignment, motor telemetry and autonomous inspection into one control view.</p>
+          </div>
+          <div class="health-score">
+            <div class="score-ring"><span id="healthScore">92</span><small>/100</small></div>
+            <div><strong>Overall Health</strong><span class="healthy">● Healthy</span></div>
+          </div>
+        </div>
+
+        <div class="metrics-grid">
+          <article class="metric-card"><div class="metric-icon blue">RPM</div><span>Motor RPM</span><strong id="rpmValue">1,480</strong><small><em class="up">↑ 0.8%</em> vs baseline</small></article>
+          <article class="metric-card"><div class="metric-icon cyan">⚡</div><span>Power Load</span><strong id="powerValue">85%</strong><small><em class="warn">↑ 4.2%</em> last 10 min</small></article>
+          <article class="metric-card"><div class="metric-icon green">↔</div><span>Alignment</span><strong id="alignmentValue">98.7%</strong><small><em class="up">Normal</em> · Beam sensors</small></article>
+          <article class="metric-card"><div class="metric-icon amber">◒</div><span>Prediction Risk</span><strong id="riskValue">12%</strong><small><em class="up">Low</em> · next 24 hours</small></article>
+        </div>
+
+        <div class="dashboard-grid">
+          <article class="panel large">
+            <div class="panel-head"><div><h3>Conveyor Telemetry</h3><span>Last 30 minutes · Motor load & RPM</span></div><div class="legend"><span><i></i> Load</span><span><i class="line"></i> RPM</span></div></div>
+            <div class="chart-wrap"><svg id="telemetryChart" viewBox="0 0 900 260" preserveAspectRatio="none"></svg></div>
+            <div class="chart-labels"><span>-30m</span><span>-20m</span><span>-10m</span><span>Now</span></div>
+          </article>
+
+          <article class="panel">
+            <div class="panel-head"><div><h3>System Health</h3><span>Sensor module status</span></div><span class="live-pill">LIVE</span></div>
+            <div class="health-list">
+              <div><div class="health-label"><span>Terahertz scan</span><b>96%</b></div><div class="progress"><i style="width:96%"></i></div></div>
+              <div><div class="health-label"><span>Feedback system</span><b>91%</b></div><div class="progress"><i style="width:91%"></i></div></div>
+              <div><div class="health-label"><span>Beam alignment</span><b>99%</b></div><div class="progress"><i style="width:99%"></i></div></div>
+              <div><div class="health-label"><span>Motor telemetry</span><b>94%</b></div><div class="progress"><i style="width:94%"></i></div></div>
+              <div><div class="health-label"><span>AI inspection</span><b>88%</b></div><div class="progress"><i style="width:88%"></i></div></div>
+            </div>
+          </article>
+        </div>
+
+        <div class="dashboard-grid lower">
+          <article class="panel">
+            <div class="panel-head"><div><h3>Conveyor Zones</h3><span>Fault localization by Zone ID</span></div><button class="text-btn" data-go="zones">View all →</button></div>
+            <div class="zone-map">
+              <div class="belt"><span class="zone safe">Z-01</span><span class="zone safe">Z-02</span><span class="zone watch">Z-03</span><span class="zone safe">Z-04</span><span class="zone safe">Z-05</span><span class="zone safe">Z-06</span></div>
+              <div class="zone-marker" style="left:49%"><span>⚠</span></div>
+            </div>
+            <div class="zone-summary"><span><i class="dot green"></i> 5 Normal</span><span><i class="dot amber"></i> 1 Watch</span><span><i class="dot red"></i> 0 Critical</span></div>
+          </article>
+
+          <article class="panel">
+            <div class="panel-head"><div><h3>Recent Alerts</h3><span>Priority events</span></div><button class="text-btn" data-go="alerts">Open alerts →</button></div>
+            <div class="alert-list" id="recentAlerts">
+              <div class="alert-row amber"><span class="alert-symbol">!</span><div><strong>Elevated motor load</strong><small>Z-03 · 2 min ago</small></div><b>Medium</b></div>
+              <div class="alert-row blue"><span class="alert-symbol">◈</span><div><strong>Wear pattern detected</strong><small>Z-02 · 14 min ago</small></div><b>Advisory</b></div>
+              <div class="alert-row green"><span class="alert-symbol">✓</span><div><strong>Inspection completed</strong><small>Z-05 · 31 min ago</small></div><b>Resolved</b></div>
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <section id="conveyor" class="page">
+        <div class="page-intro"><span class="eyebrow">REAL-TIME ASSET VIEW</span><h3>Conveyor Health</h3><p>Monitor the operating condition of the belt, drive motor and detection modules.</p></div>
+        <div class="metrics-grid">
+          <article class="metric-card"><span>Conveyor speed</span><strong>3.8 m/s</strong><small><em class="up">Stable</em></small></article>
+          <article class="metric-card"><span>Belt tension</span><strong>74%</strong><small><em class="up">Within range</em></small></article>
+          <article class="metric-card"><span>Temperature</span><strong>61.4°C</strong><small><em class="warn">+3.1°C</em> vs baseline</small></article>
+          <article class="metric-card"><span>Runtime today</span><strong>18h 42m</strong><small>Availability <em class="up">97.4%</em></small></article>
+        </div>
+        <div class="dashboard-grid">
+          <article class="panel large"><div class="panel-head"><div><h3>Live Conveyor Line</h3><span>Sensor locations and current state</span></div><span class="live-pill">LIVE</span></div><div class="conveyor-visual"><div class="pulley"></div><div class="moving-belt"><span>IRON ORE</span><span>IRON ORE</span><span>IRON ORE</span><span>IRON ORE</span></div><div class="pulley right"></div><div class="sensor-tag thz">THz <small>96%</small></div><div class="sensor-tag beam">BEAM <small>99%</small></div><div class="sensor-tag motor">MOTOR <small>94%</small></div></div></article>
+          <article class="panel"><div class="panel-head"><div><h3>Operating Limits</h3><span>Configured safety thresholds</span></div></div><div class="limit-list"><div><span>Motor RPM</span><b>1,480 / 1,650</b><div class="progress"><i style="width:90%"></i></div></div><div><span>Power</span><b>85% / 95%</b><div class="progress amber"><i style="width:85%"></i></div></div><div><span>Temperature</span><b>61.4 / 75°C</b><div class="progress"><i style="width:82%"></i></div></div><div><span>Misalignment</span><b>0.8 / 2.0 mm</b><div class="progress"><i style="width:40%"></i></div></div></div></article>
+        </div>
+      </section>
+
+      <section id="zones" class="page">
+        <div class="page-intro"><span class="eyebrow">ZONE IDENTIFICATION</span><h3>Zone Monitoring</h3><p>Locate detected faults precisely along the conveyor route.</p></div>
+        <div class="zone-grid">
+          <div class="zone-card normal"><span>Z-01</span><strong>Normal</strong><small>THz scan · 98%</small><div class="mini-progress"><i style="width:98%"></i></div></div>
+          <div class="zone-card normal"><span>Z-02</span><strong>Normal</strong><small>Wear risk · 11%</small><div class="mini-progress"><i style="width:89%"></i></div></div>
+          <div class="zone-card watch"><span>Z-03</span><strong>Watch</strong><small>Motor load anomaly · 68%</small><div class="mini-progress"><i style="width:68%"></i></div></div>
+          <div class="zone-card normal"><span>Z-04</span><strong>Normal</strong><small>Alignment · 99%</small><div class="mini-progress"><i style="width:99%"></i></div></div>
+          <div class="zone-card normal"><span>Z-05</span><strong>Normal</strong><small>Inspection clear · 96%</small><div class="mini-progress"><i style="width:96%"></i></div></div>
+          <div class="zone-card normal"><span>Z-06</span><strong>Normal</strong><small>THz scan · 97%</small><div class="mini-progress"><i style="width:97%"></i></div></div>
+        </div>
+        <article class="panel"><div class="panel-head"><div><h3>Zone Event Timeline</h3><span>Most recent detections</span></div></div><div class="timeline"><div><b>21:34</b><span class="timeline-dot amber"></span><section><strong>Z-03 · Elevated motor load</strong><small>Power increased above learned baseline. AI risk score: 68%.</small></section></div><div><b>21:22</b><span class="timeline-dot blue"></span><section><strong>Z-02 · Wear pattern</strong><small>Early surface wear detected. No immediate shutdown required.</small></section></div><div><b>21:05</b><span class="timeline-dot green"></span><section><strong>Z-05 · Inspection complete</strong><small>No defects detected by autonomous inspection.</small></section></div></div></article>
+      </section>
+
+      <section id="inspection" class="page">
+        <div class="page-intro"><span class="eyebrow">MULTIMODAL INSPECTION</span><h3>AI Inspection</h3><p>Review simulated inspection findings from THz sensing and autonomous visual inspection.</p></div>
+        <div class="inspection-layout">
+          <article class="scan-card"><div class="scan-grid"></div><div class="scan-belt"></div><div class="scan-line"></div><div class="scan-label">THz TOMOGRAPHY <span>SCANNING</span></div><div class="defect-marker" style="left:58%;top:48%"><b>!</b><span>Possible wear</span></div></article>
+          <article class="panel"><div class="panel-head"><div><h3>AI Findings</h3><span>Latest scan · 21:32</span></div><span class="confidence">94% confidence</span></div><div class="finding criticalish"><span>◉</span><div><strong>Surface wear pattern</strong><small>Zone Z-03 · estimated severity: Medium</small></div><b>68%</b></div><div class="finding"><span>✓</span><div><strong>No splice rupture</strong><small>Joint integrity within expected range</small></div><b>97%</b></div><div class="finding"><span>✓</span><div><strong>No major tear / crack</strong><small>Internal scan shows no critical anomaly</small></div><b>95%</b></div><button class="primary-btn" id="runScan">Run new inspection</button></article>
+        </div>
+      </section>
+
+      <section id="alerts" class="page">
+        <div class="page-intro"><span class="eyebrow">EVENT MANAGEMENT</span><h3>Alerts & Predictions</h3><p>Prioritize anomalies before they become conveyor failures.</p></div>
+        <div class="alert-filter"><button class="filter active">All <b>3</b></button><button class="filter">Critical <b>0</b></button><button class="filter">Warning <b>1</b></button><button class="filter">Advisory <b>2</b></button></div>
+        <article class="panel alert-panel"><div class="full-alert amber"><div class="big-alert">!</div><div><span>WARNING · 2 min ago</span><h3>Elevated motor load in Z-03</h3><p>Motor power is at 85%, trending upward. The predictive model estimates a 68% chance of a developing mechanical issue within the next 24 hours.</p><div class="alert-actions"><button class="primary-btn small-btn" data-go="maintenance">Schedule maintenance</button><button class="secondary-btn">Acknowledge</button></div></div><div class="risk-box"><small>RISK</small><strong>68%</strong><span>Medium</span></div></div>
+          <div class="full-alert blue"><div class="big-alert">◈</div><div><span>ADVISORY · 14 min ago</span><h3>Wear pattern detected in Z-02</h3><p>Early-stage surface wear found during THz scan. Continue monitoring and include this zone in the next planned inspection.</p></div><div class="risk-box"><small>RISK</small><strong>11%</strong><span>Low</span></div></div>
+          <div class="full-alert green"><div class="big-alert">✓</div><div><span>RESOLVED · 31 min ago</span><h3>Autonomous inspection completed</h3><p>Drone inspection of Z-05 completed successfully. No critical defects detected.</p></div><div class="risk-box"><small>STATUS</small><strong>OK</strong><span>Resolved</span></div></div>
+        </article>
+      </section>
+
+      <section id="maintenance" class="page">
+        <div class="page-intro"><span class="eyebrow">PREDICTIVE MAINTENANCE</span><h3>Maintenance Planner</h3><p>Move from reactive repairs to condition-based maintenance.</p></div>
+        <div class="maintenance-grid">
+          <article class="maintenance-card urgent"><span class="priority">MEDIUM PRIORITY</span><h3>Inspect drive motor & pulley</h3><p>Triggered by rising motor load in Z-03.</p><div class="maintenance-meta"><span>Recommended</span><strong>Within 24 hours</strong></div><button class="primary-btn schedule">Schedule task</button></article>
+          <article class="maintenance-card"><span class="priority">ROUTINE</span><h3>Belt splice inspection</h3><p>Planned THz inspection based on operating hours.</p><div class="maintenance-meta"><span>Due</span><strong>In 3 days</strong></div><button class="secondary-btn schedule">Schedule task</button></article>
+          <article class="maintenance-card"><span class="priority">ROUTINE</span><h3>Beam sensor calibration</h3><p>Calibration cycle for alignment monitoring.</p><div class="maintenance-meta"><span>Due</span><strong>In 7 days</strong></div><button class="secondary-btn schedule">Schedule task</button></article>
+        </div>
+        <article class="panel"><div class="panel-head"><div><h3>Maintenance History</h3><span>Recent completed actions</span></div></div><div class="table"><div class="tr th"><span>Date</span><span>Asset / Zone</span><span>Action</span><span>Status</span></div><div class="tr"><span>02 Oct</span><span>Z-05</span><span>Autonomous inspection</span><b class="tag green">Completed</b></div><div class="tr"><span>28 Sep</span><span>Z-02</span><span>Splice visual inspection</span><b class="tag green">Completed</b></div><div class="tr"><span>21 Sep</span><span>Drive Motor</span><span>Thermal inspection</span><b class="tag green">Completed</b></div></div></article>
+      </section>
+    </main>
+  </div>
+
+  <div class="toast" id="toast"><span>✓</span><div><strong>Action completed</strong><small id="toastText">System updated.</small></div></div>
+  <script src="app.js"></script>
+</body>
+</html>
